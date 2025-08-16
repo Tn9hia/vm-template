@@ -49,21 +49,15 @@ lvextend -l +100%FREE /dev/debian-vg/root
 resize2fs /dev/debian-vg/root
 rm -f /etc/rc.local
 rm -f /home/arp.sh
+systemctl restart networking
 history -c
 EOF
 chmod 755 /home/arp.sh
 
 echo "[9] Setup network..."
-cat << 'EOF' > /etc/systemd/network/20-ens192.network
-[Match]
-Name=ens192
-
-[Network]
-DHCP=yes
-EOF
-
-systemctl restart systemd-networkd
-systemctl restart systemd-resolved
+rm /etc/network/interfaces
+# SERVICE_FILE="/lib/systemd/system/networking.service"
+# sed -i '/^After=/ s/$/ vmtoolsd.service open-vm-tools.service/' "$SERVICE_FILE"
 
 rm -f /var/lib/systemd/lease/*
 
@@ -80,4 +74,4 @@ journalctl --vacuum-time=1s
 history -c
 
 echo "[12] Done. Self-destructing..."
-shred -u "$0"d
+shred -u "$0"
