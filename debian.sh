@@ -61,7 +61,7 @@ for i in $(seq 1 $TIMEOUT); do
 done
 rm -f /etc/rc.local
 rm -f /home/arp.sh
-history -w
+history -c
 EOF
 chmod 755 /home/arp.sh
 
