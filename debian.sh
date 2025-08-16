@@ -47,10 +47,21 @@ growpart /dev/sda 3
 pvresize /dev/sda3
 lvextend -l +100%FREE /dev/debian-vg/root
 resize2fs /dev/debian-vg/root
+NETWORK_CONFIG="/etc/network/interfaces"
+TIMEOUT=30
+for i in $(seq 1 $TIMEOUT); do
+	if [ -f "$NETWORK_CONFIG" ]; then
+		echo "Network configuration file found, restarting networking.service"
+		# Restart networking service
+		systemctl restart networking.service
+		break
+	fi
+	echo "Waiting for $NETWORK_CONFIG ($i/$TIMEOUT)..."
+	sleep 1
+done
 rm -f /etc/rc.local
 rm -f /home/arp.sh
-systemctl restart networking
-history -c
+history -w
 EOF
 chmod 755 /home/arp.sh
 
