@@ -11,20 +11,28 @@ dnf install -y perl open-vm-tools cloud-utils-growpart
 sed -i 's|^password\s\+requisite\s\+pam_pwquality.so.*|password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root|' /etc/pam.d/system-auth
 
 # setup network
-nmcli connection modify ens192 ipv4.method auto ipv4.addresses "" ipv4.gateway "" ipv4.dns "" ipv6.method ignore
-nmcli connection modify ens192 connection.autoconnect yes
+INTERFACE="ens192"
+CONNECTION_NAME="ens192"
 
-# Tạo UUID mới
-NEW_UUID=$(uuidgen)
-nmcli connection modify ens192 connection.uuid "$NEW_UUID"
+echo "Deleting old connection..."
+nmcli connection delete "$CONNECTION_NAME" 2>/dev/null || true
 
-# Xóa cloned MAC address
-nmcli connection modify ens192 802-3-ethernet.cloned-mac-address ""
+echo "Creating new connection with new UUID..."
+nmcli connection add type ethernet con-name "$CONNECTION_NAME" ifname "$INTERFACE"
 
+echo "Configuring network settings..."
+nmcli connection modify "$CONNECTION_NAME" ipv4.method auto
+nmcli connection modify "$CONNECTION_NAME" ipv6.method ignore  
+nmcli connection modify "$CONNECTION_NAME" connection.autoconnect yes
+
+# Xóa cloned MAC address (nếu có)
+nmcli connection modify "$CONNECTION_NAME" 802-3-ethernet.cloned-mac-address ""
+
+echo "Cleaning up lease files and udev rules..."
 rm -f /var/lib/NetworkManager/*.lease
-
 rm -f /etc/udev/rules.d/70-persistent-net.rules
 
+echo "Restarting NetworkManager..."
 systemctl enable NetworkManager
 systemctl restart NetworkManager
 
