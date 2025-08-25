@@ -73,3 +73,4 @@ systemctl enable arp-resize.service
 truncate -s 0 /etc/machine-id
 rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
+history -c
