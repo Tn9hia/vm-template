@@ -14,8 +14,11 @@ sed -i 's|^password\s\+requisite\s\+pam_pwquality.so.*|password    requisite    
 nmcli connection modify ens192 ipv4.method auto ipv4.addresses "" ipv4.gateway "" ipv4.dns "" ipv6.method ignore
 nmcli connection modify ens192 connection.autoconnect yes
 
-# delete MAC and UUID
-nmcli connection modify ens192 connection.uuid ""
+# Tạo UUID mới
+NEW_UUID=$(uuidgen)
+nmcli connection modify ens192 connection.uuid "$NEW_UUID"
+
+# Xóa cloned MAC address
 nmcli connection modify ens192 802-3-ethernet.cloned-mac-address ""
 
 rm -f /var/lib/NetworkManager/*.lease
