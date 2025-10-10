@@ -1,3 +1,7 @@
+#!/bin/bash
+# Script chuẩn hóa VM Debian .04, 22.04, 24.04 cho template
+# WARNING: Script này sẽ thay đổi nhiều cấu hình hệ thống
+
 set -e
 
 echo "[1] Auto update packages..."

@@ -1,3 +1,10 @@
+#!/bin/bash
+# Script chuẩn hóa VM AlmaLinux 8,9,10 cho template
+# WARNING: Script này sẽ thay đổi nhiều cấu hình hệ thống
+# Change interface name if needed
+
+set -e
+
 # update system
 dnf update -y && dnf upgrade -y
 
@@ -73,4 +80,5 @@ systemctl enable arp-resize.service
 truncate -s 0 /etc/machine-id
 rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
+rm -f ~/.bash_history
 history -c

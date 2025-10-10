@@ -1,5 +1,6 @@
 # VM Windows Setup Script
 # Chạy với quyền Administrator
+# Tải file bằng lệnh sau: irm <link> | iex
 
 Write-Host "=== VM Windows Setup Script ===" -ForegroundColor Green
 Write-Host "Đang thiết lập VM Windows..." -ForegroundColor Yellow

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Script chuẩn hóa VM Ubuntu 20.04 cho template
-# Author: Nghia & ChatGPT
+# Script chuẩn hóa VM Ubuntu 20.04, 22.04, 24.04 cho template
 # WARNING: Script này sẽ thay đổi nhiều cấu hình hệ thống
 
 set -e
