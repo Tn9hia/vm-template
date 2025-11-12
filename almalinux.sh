@@ -15,6 +15,9 @@ timedatectl set-timezone Asia/Ho_Chi_Minh
 dnf install -y perl open-vm-tools cloud-utils-growpart
 sudo systemctl enable --now vmtoolsd.service
 
+# start and enable vmtools
+systemctl enable --now vmtoolsd
+
 # set password policy
 sed -i 's|^password\s\+requisite\s\+pam_pwquality.so.*|password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root|' /etc/pam.d/system-auth
 
@@ -83,3 +86,5 @@ rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
 rm -f ~/.bash_history
 history -c
+
+echo "AlmaLinux VM template customization completed. \n you should now run "history -c", remove the script, shut down the VM and convert it to a template."

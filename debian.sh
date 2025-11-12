@@ -12,6 +12,7 @@ timedatectl set-timezone Asia/Ho_Chi_Minh
 
 echo "[3] Install additional package"
 apt install open-vm-tools cloud-guest-utils
+systemctl enable --now vmtoolsd
 
 echo "[4] Install strong password policy..."
 apt install -y libpam-pwquality
@@ -90,3 +91,5 @@ history -c
 
 echo "[12] Done. Self-destructing..."
 shred -u "$0"
+
+echo "AlmaLinux VM template customization completed. \n you should now run "history -c", remove the script, shut down the VM and convert it to a template."

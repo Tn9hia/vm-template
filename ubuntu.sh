@@ -4,15 +4,20 @@
 
 set -e
 
+// update system
 echo "[1] Auto update packages..."
 apt update -y && apt upgrade -y
 
+# set timezone
 echo "[2] Set timezone Asia/Ho_Chi_Minh..."
 timedatectl set-timezone Asia/Ho_Chi_Minh
 
+# install VMware Tools
 echo "[3] Install VMware Tools..."
 apt install -y open-vm-tools
+systemctl enable --now vmtoolsd
 
+# Remove cloud-init network config
 echo "[4] Remove cloud-init network cfg..."
 rm -f /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
 rm -f /etc/cloud/cloud.cfg.d/99-installer.cfg
@@ -81,3 +86,6 @@ history -c
 
 echo "[14] Done. Self-destructing..."
 shred -u "$0"
+
+echo "Remember to delete default user accounts before converting to template."
+echo "Ubuntu VM template customization completed. \n you should now run "history -c", remove the script, shut down the VM and convert it to a template."
