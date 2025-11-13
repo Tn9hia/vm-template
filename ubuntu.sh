@@ -4,7 +4,7 @@
 
 set -e
 
-// update system
+# update system
 echo "[1] Auto update packages..."
 apt update -y && apt upgrade -y
 

@@ -1,6 +1,10 @@
 # VM Windows Setup Script
 # Chạy với quyền Administrator
 # Tải file bằng lệnh sau: irm <link> | iex
+# https://raw.githubusercontent.com/Tn9hia/vm-template/refs/heads/main/tvlm-custome-sc.bat
+# 
+# https://raw.githubusercontent.com/Tn9hia/vm-template/refs/heads/main/vtlm.bat
+# C:\Windows
 
 Write-Host "=== VM Windows Setup Script ===" -ForegroundColor Green
 Write-Host "Đang thiết lập VM Windows..." -ForegroundColor Yellow
