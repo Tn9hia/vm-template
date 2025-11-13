@@ -15,7 +15,7 @@ timedatectl set-timezone Asia/Ho_Chi_Minh
 # install VMware Tools
 echo "[3] Install VMware Tools..."
 apt install -y open-vm-tools
-systemctl enable --now vmtoolsd.service
+systemctl enable --now open-vm-tools.service
 
 # Remove cloud-init network config
 echo "[4] Remove cloud-init network cfg..."
