@@ -16,7 +16,7 @@ dnf install -y perl open-vm-tools cloud-utils-growpart
 sudo systemctl enable --now vmtoolsd.service
 
 # start and enable vmtools
-systemctl enable --now vmtoolsd
+systemctl enable --now vmtoolsd.service
 
 # set password policy
 sed -i 's|^password\s\+requisite\s\+pam_pwquality.so.*|password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root|' /etc/pam.d/system-auth
