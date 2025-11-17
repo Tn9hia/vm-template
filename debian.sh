@@ -12,7 +12,7 @@ timedatectl set-timezone Asia/Ho_Chi_Minh
 
 echo "[3] Install additional package"
 apt install open-vm-tools cloud-guest-utils
-systemctl enable --now vmtoolsd.service
+systemctl enable --now open-vm-tools.service
 
 echo "[4] Install strong password policy..."
 apt install -y libpam-pwquality
