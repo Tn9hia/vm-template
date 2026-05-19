@@ -36,7 +36,6 @@ password        requisite                       pam_deny.so
 password        required                        pam_permit.so
 EOF
 
-
 echo "[6] Enable SSH for root..."
 apt install -y openssh-server
 systemctl enable ssh
