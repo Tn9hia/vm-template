@@ -18,10 +18,11 @@ echo "[4] Install strong password policy..."
 apt install -y libpam-pwquality
 
 # Xóa mọi dòng pam_pwquality.so hiện có
-sed -i '/pam_pwquality.so/d' /etc/pam.d/common-password
+sed -i '/pam_pwquality\.so/d' /etc/pam.d/common-password
 
-# Thêm lại cấu hình mạnh
-echo "password requisite pam_pwquality.so retry=3 minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root" >> /etc/pam.d/common-password
+# Insert TRƯỚC dòng pam_unix.so
+sed -i '/pam_unix\.so/i password\trequisite\t\t\t\tpam_pwquality.so retry=3 minlen=8 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root' \
+  /etc/pam.d/common-password
 
 echo "[5] Enable SSH for root..."
 apt install -y openssh-server
