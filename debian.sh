@@ -89,6 +89,7 @@ rm -f ~/.bash_history
 journalctl --rotate
 journalctl --vacuum-time=1s
 history -c
+find /var/log -type f -name "*.gz" -delete
 
 echo "[12] Done. Self-destructing..."
 shred -u "$0"

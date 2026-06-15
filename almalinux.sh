@@ -86,5 +86,8 @@ rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
 rm -f ~/.bash_history
 history -c
+find /var/log -type f -name "*.gz" -delete
+journalctl --rotate
+journalctl --vacuum-time=1s
 
 echo "AlmaLinux VM template customization completed. \n you should now run "history -c", remove the script, shut down the VM and convert it to a template."
